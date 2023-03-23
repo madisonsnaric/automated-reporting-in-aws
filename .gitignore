@@ -1,6 +1,5 @@
 .terraform/
 terraform.tfstate
-terraform.tfstate
 terraform.tfstate.backup
 terraform.tfvars
 lambda_function.zip

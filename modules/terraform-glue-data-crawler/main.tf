@@ -1,5 +1,5 @@
-module "terraform-aws-athena-view" {
-    source = "../terraform-aws-athena-view"
+module "terraform-aws-athena-views" {
+    source = "../terraform-aws-athena-views"
 }
 
 resource "aws_s3_bucket" "merakisecurityevents-query-results" {
