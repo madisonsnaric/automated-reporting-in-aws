@@ -1,2 +1,5 @@
-# terraform-automated-reporting
-Terraform module to automate reports by using Lambda, CloudWatch, Glue, Lake Formation, and Athena 
+This module can be used to automate reporting. A Lambda function requests data from an API and puts the .jsonl (JSON lines) file into two S3 buckets (bucket for current data and archival bucket for all previous data). The Lambda function is immediately triggered by a local-exec provisioner. A CloudWatch event is created and attached to the Lambda that will trigger the Lambda every Monday at 1am to continuously and automatically update the data. A Glue Crawler crawls the .jsonl file in the S3 bucket and creates a schema and a database and table in Lake Formation. Athena views are programmatically created in the terraform-aws-athena-view module from https://github.com/iconara/terraform-aws-athena-view. The views will be updated after the Lambda function runs to pull new data every Monday. QuickSight can then use the Athena views to create datasets which can be used to create visual dashboards of metrics. Terraform has not provided a Quicksight resource to create-data-set yet, however the aws_cloudformation_stack resource that links Terraform to CloudFormation could be used to programatically create datasets. 
+
+This code specifically pulls the Meraki Security Events report for the past week, but this module could be used as a template to automate visual report dashboards of any data that is accessible via an API. 
+
+
